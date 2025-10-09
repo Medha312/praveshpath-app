@@ -1,36 +1,52 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode'; // Import the new library
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  // This effect runs when the app starts to check for a token
   useEffect(() => {
+    // When the app starts, check for a token in localStorage
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      setToken(storedToken);
+      try {
+        // Decode the token to get user info and check expiration
+        const decodedUser = jwtDecode(storedToken);
+        if (decodedUser.exp * 1000 > Date.now()) {
+          setUser(decodedUser.user); // The 'user' object from our token payload
+        } else {
+          // Token is expired
+          localStorage.removeItem('token');
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem('token');
+      }
     }
   }, []);
 
-  const login = (newToken) => {
+  const login = (userData, newToken) => {
     localStorage.setItem('token', newToken);
+    setUser(userData);
     setToken(newToken);
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    setUser(null);
     setToken(null);
   };
 
+  // Now we provide the user object as well
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use the auth context easily
 export const useAuth = () => {
   return useContext(AuthContext);
 };

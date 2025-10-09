@@ -2,10 +2,11 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import SchoolIcon from '@mui/icons-material/School'; // An icon for our logo
+import SchoolIcon from '@mui/icons-material/School';
 
 const Navbar = () => {
-  const { token, logout } = useAuth();
+  // Get the user object and logout function from our context
+  const { user, logout } = useAuth(); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,7 +15,6 @@ const Navbar = () => {
   };
 
   return (
-    // Using sx prop for component-specific styling with our theme colors
     <AppBar position="static" sx={{ bgcolor: 'var(--primary-color)' }}>
       <Toolbar>
         {/* Site Title / Logo */}
@@ -27,12 +27,17 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <Button color="inherit" component={Link} to="/">Home</Button>
-        {token ? (
+        {user ? (
+          // If a user is logged in
           <>
+            {user.role === 'admin' && (
+              <Button color="inherit" component={Link} to="/admin">Admin</Button>
+            )}
             <Button color="inherit" component={Link} to="/shortlist">My Shortlist</Button>
             <Button color="inherit" onClick={handleLogout} sx={{ bgcolor: '#dc3545' }}>Logout</Button>
           </>
         ) : (
+          // If no user is logged in
           <>
             <Button color="inherit" component={Link} to="/login">Login</Button>
             <Button color="inherit" component={Link} to="/register">Register</Button>

@@ -9,12 +9,12 @@ const ShortlistPage = () => {
   const { token } = useAuth();
 
   useEffect(() => {
-    // ... useEffect code is the same ...
     const fetchShortlist = async () => {
       if (!token) { setLoading(false); return; }
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const res = await axios.get('http://localhost:5000/api/users/shortlist', config);
+        // CORRECTED: Using the environment variable
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/shortlist`, config);
         setShortlist(res.data);
         setLoading(false);
       } catch (err) { console.error('Error fetching shortlist:', err); setLoading(false); }
@@ -23,10 +23,10 @@ const ShortlistPage = () => {
   }, [token]);
 
   const handleRemove = async (collegeId) => {
-    // ... handleRemove code is the same ...
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:5000/api/users/shortlist/${collegeId}`, config);
+      // CORRECTED: Using the environment variable
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/users/shortlist/${collegeId}`, config);
       setShortlist(shortlist.filter(college => college._id !== collegeId));
       alert('College removed from shortlist.');
     } catch (err) { console.error('Error removing college:', err); alert('Could not remove college.'); }
@@ -44,12 +44,11 @@ const ShortlistPage = () => {
           {shortlist.map(college => (
             <MuiLink href={college.websiteUrl} target="_blank" rel="noopener noreferrer" underline="none" key={college._id}>
               <Card className="college-card" sx={{ display: 'flex', mb: 2 }}>
-                <CardMedia component="img" sx={{ width: 151 }} image={college.imageUrl || 'https://via.placeholder.com/151'} alt={college.name} />
+                <CardMedia component="img" sx={{ width: 151, height: 140, objectFit: 'contain', p: 1 }} image={college.imageUrl || 'https://via.placeholder.com/151'} alt={college.name} />
                 <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                   <CardContent>
                     <Typography variant="h5" component="h3">{college.name}</Typography>
                     <Typography color="text.secondary">{college.location.city}, {college.location.state}</Typography>
-                    {/* 👇 ADDED THIS BOX FOR TYPE AND RANKING 👇 */}
                     <Box sx={{ display: 'flex', gap: 2, mt: 1 }}>
                       <Typography variant="body2"><b>Type:</b> {college.type}</Typography>
                       <Typography variant="body2"><b>NIRF Rank:</b> {college.nirfRanking || 'N/A'}</Typography>

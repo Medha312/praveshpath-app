@@ -2,23 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const { name, email, password } = formData;
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const newUser = { name, email, password };
-      const res = await axios.post('http://localhost:5000/api/users/register', newUser);
+      // CORRECTED: Using the environment variable
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, newUser);
       console.log('Success!', res.data);
       alert('Registration successful! Please log in.');
     } catch (err) {

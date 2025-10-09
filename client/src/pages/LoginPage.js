@@ -14,8 +14,9 @@ const LoginPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', { email, password });
-      login(res.data.token);
+      // CORRECTED: Using the environment variable
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, { email, password });
+      login(res.data.user, res.data.token); // Pass both user object and token
       alert('Login successful!');
       navigate('/');
     } catch (err) {
@@ -25,29 +26,16 @@ const LoginPage = () => {
   };
 
   return (
-    // 👇 WRAP EVERYTHING IN THIS DIV 👇
     <div className="main-content"> 
       <h1>Login to Your Account</h1>
       <form onSubmit={onSubmit}>
         <div>
           <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
+          <input type="email" name="email" value={email} onChange={onChange} required />
         </div>
         <div>
           <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            required
-          />
+          <input type="password" name="password" value={password} onChange={onChange} required />
         </div>
         <button type="submit">Login</button>
       </form>
