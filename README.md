@@ -1,9 +1,12 @@
 PraveshPath 
+
 PraveshPath is a full-stack MERN (MongoDB, Express, React, Node.js) web application designed as a comprehensive career guidance tool for students seeking admission to engineering colleges in India. It allows users to find eligible colleges based on their entrance exam ranks, search for specific institutions, and save their choices to a personalized shortlist. The application also features a secure admin panel for managing college data.
 
-Live Demo: [INSERT YOUR LIVE NETLIFY URL HERE]
+Live Demo: https://68e80fc09f2bfb1a62c1c8b7--praveshpath-app.netlify.app/
+
 
 Key Features 
+
 College Prediction Engine: Recommends colleges based on a student's rank, category, and preferred branch.
 
 Dynamic College Search: A powerful search bar to find specific colleges by name.
@@ -18,6 +21,7 @@ Rich UI: A modern, professional user interface built with React and Material-UI 
 
 Fully Deployed: The backend is live on Render, and the frontend is live on Netlify.
 
+
 System Architecture
 The application follows a modern MERN stack architecture with a decoupled frontend and backend.
 
@@ -29,6 +33,7 @@ The MongoDB Atlas database serves as the persistent data store in the cloud.
 
 Communication between the frontend and backend happens via a RESTful API.
 
+
 Technology Stack 
 Frontend: React, React Router, Material-UI (MUI), Axios
 
@@ -39,6 +44,7 @@ Database: MongoDB (with Mongoose)
 Authentication: JSON Web Tokens (JWT), bcryptjs
 
 Deployment: Netlify (Frontend), Render (Backend)
+
 
 API Endpoints
 A brief overview of the main API routes available.
