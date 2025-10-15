@@ -5,6 +5,7 @@ PraveshPath is a full-stack MERN (MongoDB, Express, React, Node.js) web applicat
 Live Demo: https://68e80fc09f2bfb1a62c1c8b7--praveshpath-app.netlify.app/
 
 
+
 Key Features 
 
 College Prediction Engine: Recommends colleges based on a student's rank, category, and preferred branch.
@@ -22,6 +23,7 @@ Rich UI: A modern, professional user interface built with React and Material-UI 
 Fully Deployed: The backend is live on Render, and the frontend is live on Netlify.
 
 
+
 System Architecture
 The application follows a modern MERN stack architecture with a decoupled frontend and backend.
 
@@ -32,6 +34,7 @@ The Backend API is a Node.js/Express server hosted on Render, handling all busin
 The MongoDB Atlas database serves as the persistent data store in the cloud.
 
 Communication between the frontend and backend happens via a RESTful API.
+
 
 
 Technology Stack 
@@ -46,16 +49,25 @@ Authentication: JSON Web Tokens (JWT), bcryptjs
 Deployment: Netlify (Frontend), Render (Backend)
 
 
+
 API Endpoints
 A brief overview of the main API routes available.
 
 Method	Endpoint	Description	Access
+
 POST	/api/users/register	Register a new user.	Public
+
 POST	/api/users/login	Authenticate a user.	Public
+
 GET	/api/colleges/search	Search colleges by name.	Public
+
 POST	/api/predict	Predict eligible colleges.	Public
+
 PUT	/api/users/shortlist/:id	Add college to shortlist.	Private
+
 GET	/api/users/shortlist	Get user's shortlist.	Private
+
 POST	/api/colleges	Create a new college.	Admin
+
 DELETE	/api/colleges/:id	Delete a college.	Admin
 
