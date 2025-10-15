@@ -1,10 +1,11 @@
-PraveshPath 
+**PraveshPath **
 
 PraveshPath is a full-stack MERN (MongoDB, Express, React, Node.js) web application designed as a comprehensive career guidance tool for students seeking admission to engineering colleges in India. It allows users to find eligible colleges based on their entrance exam ranks, search for specific institutions, and save their choices to a personalized shortlist. The application also features a secure admin panel for managing college data.
 
 Live Demo: https://68e80fc09f2bfb1a62c1c8b7--praveshpath-app.netlify.app/
 
 Key Features 
+
 College Prediction Engine: Recommends colleges based on a student's rank, category, and preferred branch.
 
 Dynamic College Search: A powerful search bar to find specific colleges by name.
